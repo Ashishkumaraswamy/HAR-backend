@@ -1,0 +1,18 @@
+from flask import Flask,jsonify,request
+
+app=Flask(__name__)
+
+@app.route('/',methods=['GET'])
+def home():
+    return '<html><body>hello world</body></html>'
+
+@app.route('/send',methods=['POST'])
+def get_data_from_app():
+    gyroscope=request.json['gyroscope']
+    accelerometer=request.json['accelerometer']
+    # hello=request.json['hello']
+    print(gyroscope)
+    return '<html><body>success</body></html>'
+
+if __name__=="__main__":
+    app.run(host='0.0.0.0',port=4000,debug=True)
