@@ -11,8 +11,7 @@ def get_data_from_app():
     gyroscope=request.json['gyroscope']
     accelerometer=request.json['accelerometer']
     # hello=request.json['hello']
-    print(gyroscope)
-    return '<html><body>success</body></html>'
+    return request
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',port=4000,debug=True)
