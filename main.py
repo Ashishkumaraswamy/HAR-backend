@@ -15,7 +15,7 @@ def get_data_from_app():
     # hello=request.json['hello']
     data=fe.extract_features(gyroscope,accelerometer)
     loaded_model = pickle.load(open('knnpickle_file', 'rb'))
-    return jsonify(length=len(data))
+    return jsonify(gyroscope=gyroscope,accelerometer=accelerometer)
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',port=4000,debug=True)
