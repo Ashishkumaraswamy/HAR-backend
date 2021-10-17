@@ -1,4 +1,6 @@
 from flask import Flask,jsonify,request
+import pickle
+import feature_extractor as fe
 
 app=Flask(__name__)
 
@@ -11,7 +13,9 @@ def get_data_from_app():
     gyroscope=request.json['gyroscope']
     accelerometer=request.json['accelerometer']
     # hello=request.json['hello']
-    return jsonify(gyroscope=gyroscope,accelerometer=accelerometer)
+    data=fe.extract_features(gyroscope,accelerometer)
+    loaded_model = pickle.load(open('knnpickle_file', 'rb'))
+    return jsonify(length=len(data))
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',port=4000,debug=True)
