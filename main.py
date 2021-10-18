@@ -21,7 +21,7 @@ def get_data_from_app():
     outputlabel=['LAYING','SITTING','STANDING','WALKING','WALKING_DOWNSTAIRS','WALKING_UPSTAIRS']
     data = np.array(data)
     pred = outputlabel[int(loaded_model.predict(data.reshape(1,81)))]
-    dictToReturn = {'len' : len(data),'output': pred}
+    dictToReturn = {'data' : data,'output': pred}
     return jsonify(dictToReturn)
     #return jsonify(gyroscope=gyroscope,accelerometer=accelerometer)
 
