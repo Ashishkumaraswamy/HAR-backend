@@ -18,7 +18,9 @@ def get_data_from_app():
     data= fe.extract_features(np.array(input_json['gyroscope']),np.array(input_json['accelerometer']))
     #loaded_model = pickle.load(open('knnpickle_file', 'rb'))
     loaded_model = pickle.load(open('lrmodel.pkl', 'rb'))
-    dictToReturn = {'len' : len(data)}
+    outputlabel=['LAYING','SITTING','STANDING','WALKING','WALKING_DOWNSTAIRS','WALKING_UPSTAIRS']
+    pred = outputlabel[int(loaded_model.predict(data.reshape(1,81)))]
+    dictToReturn = {'len' : len(data),'output': pred}
     return jsonify(dictToReturn)
     #return jsonify(gyroscope=gyroscope,accelerometer=accelerometer)
 
