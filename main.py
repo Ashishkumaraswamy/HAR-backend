@@ -16,12 +16,18 @@ def get_data_from_app():
     #accelerometer=request.json['accelerometer']
     # hello=request.json['hello']
     data= fe.extract_features(np.array(input_json['gyroscope']),np.array(input_json['accelerometer']))
+<<<<<<< Updated upstream
     #loaded_model = pickle.load(open('knnpickle_file', 'rb'))
     loaded_model = pickle.load(open('lrmodel(2).pkl', 'rb'))
     outputlabel=['LAYING','SITTING','STANDING','WALKING','WALKING_DOWNSTAIRS','WALKING_UPSTAIRS']
     data = np.array(data)
     pred = outputlabel[int(loaded_model.predict(data.reshape(1,81)))]
     dictToReturn = {'len' : len(data),'output': pred}
+=======
+    loaded_model = pickle.load(open('knnpickle_file', 'rb'))
+    y_pred=loaded_model.predict(np.array(data))
+    dictToReturn = {'len' : len(data)}
+>>>>>>> Stashed changes
     return jsonify(dictToReturn)
     #return jsonify(gyroscope=gyroscope,accelerometer=accelerometer)
 
