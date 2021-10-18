@@ -17,8 +17,8 @@ def get_data_from_app():
     #accelerometer=request.json['accelerometer']
     # hello=request.json['hello']
     data=fe.extract_features(input_json['gyroscope'],input_json['accelerometer'])
-    loaded_model = pickle.load(open('knnpickle_file', 'rb'))
-    dictToReturn = {'gyroscope':input_json['gyroscope'],'accelerometer' :input_json['accelerometer'],'len' : len(data)}
+    #loaded_model = pickle.load(open('knnpickle_file', 'rb'))
+    dictToReturn = {'len' : len(data)}
     return jsonify(dictToReturn)
     #return jsonify(gyroscope=gyroscope,accelerometer=accelerometer)
 
