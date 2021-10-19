@@ -2,32 +2,53 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 from numpy import linalg as LA
+from scipy.signal import butter, lfilter, freqz
 np.seterr(divide='ignore', invalid='ignore')
-gyscope_val = np.random.uniform(-1,1,384)
-gyscope_val = gyscope_val.reshape(128,3)
+# gyscope_val = np.random.uniform(-1,1,384)
+# gyscope_val = gyscope_val.reshape(128,3)
 
 
-def bodyandgravity(t_acceleromter,shape1,shape2):
-    gx=0 
-    gy=0
-    gz=0
+# def bodyandgravity(t_acceleromter,shape1,shape2):
+#     gx=0 
+#     gy=0
+#     gz=0
+#     body=np.zeros((shape1,shape2))
+#     gravity=np.zeros((shape1,shape2))
+#     # print(shape1," ",shape2)
+#     for i in range(0,shape1):
+#         gx=0.9*gx+0.1*t_acceleromter[i][0]
+#         gy=0.9*gx+0.1*t_acceleromter[i][1]
+#         gz=0.9*gx+0.1*t_acceleromter[i][2]
+#         body[i][0]=t_acceleromter[i][0]-gx
+#         body[i][1]=t_acceleromter[i][1]-gy
+#         body[i][2]=t_acceleromter[i][2]-gy
+#         gravity[i][0]=gx
+#         gravity[i][1]=gy
+#         gravity[i][2]=gz
+#     return body,gravity
+
+def sepbodygravity(t_accelerometer):
+    shape1=t_accelerometer.shape[0]
+    shape2=t_accelerometer.shape[1]
     body=np.zeros((shape1,shape2))
     gravity=np.zeros((shape1,shape2))
-    # print(shape1," ",shape2)
-    for i in range(0,shape1):
-        gx=0.9*gx+0.1*t_acceleromter[i][0]
-        gy=0.9*gx+0.1*t_acceleromter[i][1]
-        gz=0.9*gx+0.1*t_acceleromter[i][2]
-        body[i][0]=t_acceleromter[i][0]-gx
-        body[i][1]=t_acceleromter[i][1]-gy
-        body[i][2]=t_acceleromter[i][2]-gy
-        gravity[i][0]=gx
-        gravity[i][1]=gy
-        gravity[i][2]=gz
+    fs=50
+    nyq=0.5*fs
+    cutoff= 0.35
+    normal_cutoff=cutoff/nyq
+    order=1
+    timeStep=1/fs
+    b,a=butter(order,normal_cutoff,btype='low',analog=True)
+    gravity[:,0]=lfilter(b,a,t_accelerometer[:,0])
+    gravity[:,1]=lfilter(b,a,t_accelerometer[:,1])
+    gravity[:,2]=lfilter(b,a,t_accelerometer[:,2])
+    body[:,0]=t_accelerometer[:,0]-gravity[:,0]
+    body[:,1]=t_accelerometer[:,1]-gravity[:,1]
+    body[:,2]=t_accelerometer[:,2]-gravity[:,2]
     return body,gravity
 
 def main(t_accelerometer):
-    body,gravity=bodyandgravity(t_accelerometer,t_accelerometer.shape[0],t_accelerometer.shape[1])
+    body,gravity=sepbodygravity(t_accelerometer)
     firstlist=[]
     secondlist=[]
     #1
