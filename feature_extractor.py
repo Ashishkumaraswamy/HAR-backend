@@ -8,24 +8,24 @@ np.seterr(divide='ignore', invalid='ignore')
 # gyscope_val = gyscope_val.reshape(128,3)
 
 
-# def bodyandgravity(t_acceleromter,shape1,shape2):
-#     gx=0 
-#     gy=0
-#     gz=0
-#     body=np.zeros((shape1,shape2))
-#     gravity=np.zeros((shape1,shape2))
-#     # print(shape1," ",shape2)
-#     for i in range(0,shape1):
-#         gx=0.9*gx+0.1*t_acceleromter[i][0]
-#         gy=0.9*gx+0.1*t_acceleromter[i][1]
-#         gz=0.9*gx+0.1*t_acceleromter[i][2]
-#         body[i][0]=t_acceleromter[i][0]-gx
-#         body[i][1]=t_acceleromter[i][1]-gy
-#         body[i][2]=t_acceleromter[i][2]-gy
-#         gravity[i][0]=gx
-#         gravity[i][1]=gy
-#         gravity[i][2]=gz
-#     return body,gravity
+def bodyandgravity(t_acceleromter,shape1,shape2):
+    gx=0 
+    gy=0
+    gz=0
+    body=np.zeros((shape1,shape2))
+    gravity=np.zeros((shape1,shape2))
+    # print(shape1," ",shape2)
+    for i in range(0,shape1):
+        gx=0.9*gx+0.1*t_acceleromter[i][0]
+        gy=0.9*gx+0.1*t_acceleromter[i][1]
+        gz=0.9*gx+0.1*t_acceleromter[i][2]
+        body[i][0]=t_acceleromter[i][0]-gx
+        body[i][1]=t_acceleromter[i][1]-gy
+        body[i][2]=t_acceleromter[i][2]-gy
+        gravity[i][0]=gx
+        gravity[i][1]=gy
+        gravity[i][2]=gz
+    return body,gravity
 
 # def sepbodygravity(t_accelerometer):
 #     shape1=t_accelerometer.shape[0]
@@ -47,9 +47,10 @@ np.seterr(divide='ignore', invalid='ignore')
 #     body[:,2]=t_accelerometer[:,2]-gravity[:,2]
 #     return body,gravity
 
-def main(t_accelerometer,gaccelerometer):
-    body=t_accelerometer
-    gravity=gaccelerometer
+def main(t_accelerometer):
+    # body=t_accelerometer
+    # gravity=gaccelerometer
+    body,gravity=bodyandgravity(t_accelerometer,t_accelerometer.shape[0],t_accelerometer.shape[1])
     firstlist=[]
     secondlist=[]
     #1
@@ -315,8 +316,8 @@ def tbodyjerkgro(gyscope_val):
     
     return gyro_list,gyro_list_2
 
-def extract_features(gyroscope,accelerometer,gaccelerometer):
-    f_1,f_3 = main(accelerometer,gaccelerometer)
+def extract_features(gyroscope,accelerometer):
+    f_1,f_3 = main(accelerometer)
     f_2,f_4 = tbodyjerkgro(gyroscope)
     f_1.extend(f_2)
     f_1.extend(f_3)
