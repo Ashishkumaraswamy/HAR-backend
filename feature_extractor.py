@@ -27,28 +27,29 @@ np.seterr(divide='ignore', invalid='ignore')
 #         gravity[i][2]=gz
 #     return body,gravity
 
-def sepbodygravity(t_accelerometer):
-    shape1=t_accelerometer.shape[0]
-    shape2=t_accelerometer.shape[1]
-    body=np.zeros((shape1,shape2))
-    gravity=np.zeros((shape1,shape2))
-    fs=50
-    nyq=0.5*fs
-    cutoff= 0.35
-    normal_cutoff=cutoff/nyq
-    order=1
-    timeStep=1/fs
-    b,a=butter(order,normal_cutoff,btype='low',analog=True)
-    gravity[:,0]=lfilter(b,a,t_accelerometer[:,0])
-    gravity[:,1]=lfilter(b,a,t_accelerometer[:,1])
-    gravity[:,2]=lfilter(b,a,t_accelerometer[:,2])
-    body[:,0]=t_accelerometer[:,0]-gravity[:,0]
-    body[:,1]=t_accelerometer[:,1]-gravity[:,1]
-    body[:,2]=t_accelerometer[:,2]-gravity[:,2]
-    return body,gravity
+# def sepbodygravity(t_accelerometer):
+#     shape1=t_accelerometer.shape[0]
+#     shape2=t_accelerometer.shape[1]
+#     body=np.zeros((shape1,shape2))
+#     gravity=np.zeros((shape1,shape2))
+#     fs=50
+#     nyq=0.5*fs
+#     cutoff= 0.35
+#     normal_cutoff=cutoff/nyq
+#     order=1
+#     timeStep=1/fs
+#     b,a=butter(order,normal_cutoff,btype='low',analog=True)
+#     gravity[:,0]=lfilter(b,a,t_accelerometer[:,0])
+#     gravity[:,1]=lfilter(b,a,t_accelerometer[:,1])
+#     gravity[:,2]=lfilter(b,a,t_accelerometer[:,2])
+#     body[:,0]=t_accelerometer[:,0]-gravity[:,0]
+#     body[:,1]=t_accelerometer[:,1]-gravity[:,1]
+#     body[:,2]=t_accelerometer[:,2]-gravity[:,2]
+#     return body,gravity
 
-def main(t_accelerometer):
-    body,gravity=sepbodygravity(t_accelerometer)
+def main(t_accelerometer,gaccelerometer):
+    body=t_accelerometer
+    gravity=gaccelerometer
     firstlist=[]
     secondlist=[]
     #1
@@ -314,8 +315,8 @@ def tbodyjerkgro(gyscope_val):
     
     return gyro_list,gyro_list_2
 
-def extract_features(gyroscope,accelerometer):
-    f_1,f_3 = main(accelerometer)
+def extract_features(gyroscope,accelerometer,gaccelerometer):
+    f_1,f_3 = main(accelerometer,gaccelerometer)
     f_2,f_4 = tbodyjerkgro(gyroscope)
     f_1.extend(f_2)
     f_1.extend(f_3)
