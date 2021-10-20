@@ -16,9 +16,9 @@ def bodyandgravity(t_acceleromter,shape1,shape2):
     gravity=np.zeros((shape1,shape2))
     # print(shape1," ",shape2)
     for i in range(0,shape1):
-        gx=0.9*gx+0.1*t_acceleromter[i][0]
-        gy=0.9*gy+0.1*t_acceleromter[i][1]
-        gz=0.9*gz+0.1*t_acceleromter[i][2]
+        gx=0.8*gx+0.2*t_acceleromter[i][0]
+        gy=0.8*gy+0.2*t_acceleromter[i][1]
+        gz=0.8*gz+0.2*t_acceleromter[i][2]
         body[i][0]=t_acceleromter[i][0]-gx
         body[i][1]=t_acceleromter[i][1]-gy
         body[i][2]=t_acceleromter[i][2]-gz
@@ -50,7 +50,8 @@ def bodyandgravity(t_acceleromter,shape1,shape2):
 def main(t_accelerometer):
     # body=t_accelerometer
     # gravity=gaccelerometer
-    body,gravity=bodyandgravity(t_accelerometer*10,t_accelerometer.shape[0],t_accelerometer.shape[1])
+    body,gravity=bodyandgravity(t_accelerometer,t_accelerometer.shape[0],t_accelerometer.shape[1])
+    body=body*10
     firstlist=[]
     secondlist=[]
     #1
