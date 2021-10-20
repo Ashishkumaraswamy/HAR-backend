@@ -29,7 +29,7 @@ def get_data_from_app():
     outputlabel=['LAYING','SITTING','STANDING','WALKING','WALKING_DOWNSTAIRS','WALKING_UPSTAIRS']
     gxmean,gymean,gzmean=gyroscope_mean(np.array(input_json['gyroscope']))
     data = np.array(data)
-    pred = outputlabel[int(loaded_model.predict(data.reshape(1,81)))]
+    pred = outputlabel[int(loaded_model.predict(data.reshape(1,9)))]
     # dictToReturn = {'data' : f_2 ,'output': pred,'shape':shape,'gxmean':gxmean,'gymean':gymean,'gzmean':gzmean}
     dictToReturn = {'output': pred,'shape':shape,'gxmean':gxmean,'gymean':gymean,'gzmean':gzmean}
     return jsonify(dictToReturn)
