@@ -21,7 +21,7 @@ def bodyandgravity(t_acceleromter,shape1,shape2):
         gz=0.9*gz+0.1*t_acceleromter[i][2]
         body[i][0]=t_acceleromter[i][0]-gx
         body[i][1]=t_acceleromter[i][1]-gy
-        body[i][2]=t_acceleromter[i][2]-gy
+        body[i][2]=t_acceleromter[i][2]-gz
         gravity[i][0]=gx
         gravity[i][1]=gy
         gravity[i][2]=gz
