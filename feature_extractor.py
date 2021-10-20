@@ -50,7 +50,7 @@ def bodyandgravity(t_acceleromter,shape1,shape2):
 def main(t_accelerometer):
     # body=t_accelerometer
     # gravity=gaccelerometer
-    body,gravity=bodyandgravity(t_accelerometer,t_accelerometer.shape[0],t_accelerometer.shape[1])
+    body,gravity=bodyandgravity(t_accelerometer*10,t_accelerometer.shape[0],t_accelerometer.shape[1])
     firstlist=[]
     secondlist=[]
     #1
@@ -317,8 +317,8 @@ def tbodyjerkgro(gyscope_val):
     return gyro_list,gyro_list_2
 
 def extract_features(gyroscope,accelerometer):
-    f_1,f_3 = main(accelerometer*10)
-    f_2,f_4 = tbodyjerkgro(gyroscope*10)
+    f_1,f_3 = main(accelerometer)
+    f_2,f_4 = tbodyjerkgro(gyroscope)
     f_1.extend(f_2)
     f_1.extend(f_3)
     f_1.extend(f_4)
