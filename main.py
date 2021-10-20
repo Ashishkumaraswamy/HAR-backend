@@ -9,6 +9,12 @@ app=Flask(__name__)
 def home():
     return '<html><body>hello world</body></html>'
 
+def gyroscope_mean(t_gyroscope):
+    xmean=np.mean(t_gyroscope[:,0])
+    ymean=np.mean(t_gyroscope[:,1])
+    zmean=np.mean(t_gyroscope[:,2])
+    return xmean,ymean,zmean
+
 @app.route('/send',methods=['POST'])
 def get_data_from_app():
     input_json = request.get_json(force=True) 
@@ -21,9 +27,10 @@ def get_data_from_app():
     #loaded_model = pickle.load(open('knnpickle_file', 'rb'))
     loaded_model = pickle.load(open('lrmodel(2).pkl', 'rb'))
     outputlabel=['LAYING','SITTING','STANDING','WALKING','WALKING_DOWNSTAIRS','WALKING_UPSTAIRS']
+    gxmean,gymean,gzmean=gyroscope_mean(np.array(input_json['gyroscope']))
     data = np.array(data)
     pred = outputlabel[int(loaded_model.predict(data.reshape(1,81)))]
-    dictToReturn = {'data' : f_2 ,'output': pred,'shape':shape}
+    dictToReturn = {'data' : f_2 ,'output': pred,'shape':shape,'gxmean':gxmean,'gymean':gymean,'gzmean':gzmean}
     return jsonify(dictToReturn)
     #return jsonify(gyroscope=gyroscope,accelerometer=accelerometer)
 
