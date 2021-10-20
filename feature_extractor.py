@@ -51,54 +51,54 @@ def main(t_accelerometer):
     # body=t_accelerometer
     # gravity=gaccelerometer
     body,gravity=bodyandgravity(t_accelerometer,t_accelerometer.shape[0],t_accelerometer.shape[1])
-    # body=body*10
+    body=body*10
     firstlist=[]
     secondlist=[]
     #1
-    tbodyaccmeanx=np.mean(body[:,0])*10
+    tbodyaccmeanx=np.mean(body[:,0])
     firstlist.append(tbodyaccmeanx)
     #2
-    tbodyaccmeany=np.mean(body[:,1])*10
+    tbodyaccmeany=np.mean(body[:,1])
     firstlist.append(tbodyaccmeany)
     #3
-    tbodyaccmeanz=np.mean(body[:,2])*10
+    tbodyaccmeanz=np.mean(body[:,2])
     firstlist.append(tbodyaccmeanz)
     #4
-    tbodyaccstdx=np.std(body[:,0])*10
+    tbodyaccstdx=np.std(body[:,0])
     firstlist.append(tbodyaccstdx)
     #5
-    tbodyaccstdy=np.std(body[:,1])*10
+    tbodyaccstdy=np.std(body[:,1])
     firstlist.append(tbodyaccstdy)
     #6
-    tbodyaccstdz=np.std(body[:,2])*10
+    tbodyaccstdz=np.std(body[:,2])
     firstlist.append(tbodyaccstdz)
     #7
-    tbodyaccmadx=np.mean(np.absolute(body[:,0]-np.mean(body[:,0])))*10
+    tbodyaccmadx=np.mean(np.absolute(body[:,0]-np.mean(body[:,0])))
     firstlist.append(tbodyaccmadx)
     # print(tbodyaccmadx)
     #8
-    tbodyaccmady=np.mean(np.absolute(body[:,1]-np.mean(body[:,1])))*10
+    tbodyaccmady=np.mean(np.absolute(body[:,1]-np.mean(body[:,1])))
     firstlist.append(tbodyaccmady)
     #9
-    tbodyaccmadz=np.mean(np.absolute(body[:,2]-np.mean(body[:,2])))*10
+    tbodyaccmadz=np.mean(np.absolute(body[:,2]-np.mean(body[:,2])))
     firstlist.append(tbodyaccmadz)
     #10
-    tbodymaxx=np.max(body[:,0])*10
+    tbodymaxx=np.max(body[:,0])
     firstlist.append(tbodymaxx)
     #11
-    tbodymaxy=np.max(body[:,1])*10
+    tbodymaxy=np.max(body[:,1])
     firstlist.append(tbodymaxy)
     #12
-    tbodymaxz=np.max(body[:,2])*10
+    tbodymaxz=np.max(body[:,2])
     firstlist.append(tbodymaxz)
     #13
-    tbodyminx=np.min(body[:,0])*10
+    tbodyminx=np.min(body[:,0])
     firstlist.append(tbodyminx)
     #14
-    tbodyminy=np.min(body[:,1])*10
+    tbodyminy=np.min(body[:,1])
     firstlist.append(tbodyminy)
     #15
-    tbodyminz=np.min(body[:,2])*10
+    tbodyminz=np.min(body[:,2])
     firstlist.append(tbodyminz)
     #16
     tbodyacciqrx=stats.iqr(body[:,0],interpolation="midpoint")
@@ -120,49 +120,49 @@ def main(t_accelerometer):
     tbodycorryz=np.corrcoef(body[:,1],body[:,2])
     firstlist.append(tbodycorryz[0 , 1])
     #22
-    tgravitymeanx=np.mean(gravity[:,0])*10
+    tgravitymeanx=np.mean(gravity[:,0])
     firstlist.append(tgravitymeanx)
     #23
-    tgravitymeany=np.mean(gravity[:,1])*10
+    tgravitymeany=np.mean(gravity[:,1])
     firstlist.append(tgravitymeany)
     #24
-    tgravitymeanz=np.mean(gravity[:,2])*10
+    tgravitymeanz=np.mean(gravity[:,2])
     firstlist.append(tgravitymeanz)
     #25
-    tgravitystdx=np.std(gravity[:,0])*10
+    tgravitystdx=np.std(gravity[:,0])
     firstlist.append(tgravitystdx)
     #26
-    tgravitystdy=np.std(gravity[:,1])*10
+    tgravitystdy=np.std(gravity[:,1])
     firstlist.append(tgravitystdy)
     #27
-    tgravitystdz=np.std(gravity[:,2])*10
+    tgravitystdz=np.std(gravity[:,2])
     firstlist.append(tgravitystdz)
     #28
-    tgravitymadx=np.mean(np.absolute(gravity[:,0]-np.mean(gravity[:,0])))*10
+    tgravitymadx=np.mean(np.absolute(gravity[:,0]-np.mean(gravity[:,0])))
     firstlist.append(tgravitymadx)
     #29
-    tgravitymady=np.mean(np.absolute(gravity[:,1]-np.mean(gravity[:,1])))*10
+    tgravitymady=np.mean(np.absolute(gravity[:,1]-np.mean(gravity[:,1])))
     firstlist.append(tgravitymady)
     #30
-    tgravitymadz=np.mean(np.absolute(gravity[:,2]-np.mean(gravity[:,2])))*10
+    tgravitymadz=np.mean(np.absolute(gravity[:,2]-np.mean(gravity[:,2])))
     firstlist.append(tgravitymadz)
     #31
-    tgravitymaxx=np.max(gravity[:,0])*10
+    tgravitymaxx=np.max(gravity[:,0])
     firstlist.append(tgravitymaxx)
     #32
-    tgravitymaxy=np.max(gravity[:,1])*10
+    tgravitymaxy=np.max(gravity[:,1])
     firstlist.append(tgravitymaxy)
     #33
-    tgravitymaxz=np.max(gravity[:,2])*10
+    tgravitymaxz=np.max(gravity[:,2])
     firstlist.append(tgravitymaxz)
     #34
-    tgravityminx=np.min(gravity[:,0])*10
+    tgravityminx=np.min(gravity[:,0])
     firstlist.append(tgravityminx)
     #35
-    tgravityminy=np.min(gravity[:,1])*10
+    tgravityminy=np.min(gravity[:,1])
     firstlist.append(tgravityminy)
     #36
-    tgravityminz=np.min(gravity[:,2])*10
+    tgravityminz=np.min(gravity[:,2])
     firstlist.append(tgravityminz)
     #37
     tgravityacciqrx=stats.iqr(gravity[:,0],interpolation="midpoint")
@@ -184,41 +184,41 @@ def main(t_accelerometer):
     tgravitycorryz=np.corrcoef(gravity[:,1],gravity[:,2])
     firstlist.append(tgravitycorryz[0 , 1])
     #64
-    tbodyaccmagmean=np.mean(LA.norm(body,axis=1))*10
+    tbodyaccmagmean=np.mean(LA.norm(body,axis=1))
     secondlist.append(tbodyaccmagmean)
     #65
-    tbodyaccmagstd=np.std(LA.norm(body,axis=1))*10
+    tbodyaccmagstd=np.std(LA.norm(body,axis=1))
     secondlist.append(tbodyaccmagstd)
     #66
     norm=LA.norm(body,axis=1)
-    tbodyaccmagmad=np.mean(np.absolute(norm-np.mean(norm)))*10
+    tbodyaccmagmad=np.mean(np.absolute(norm-np.mean(norm)))
     secondlist.append(tbodyaccmagmad)
     #67
-    tbodyaccmagmaxx=np.max(LA.norm(body,axis=1))*10
+    tbodyaccmagmaxx=np.max(LA.norm(body,axis=1))
     secondlist.append(tbodyaccmagmaxx)
     #68
-    tbodyaccmagminx=np.min(LA.norm(body,axis=1))*10
+    tbodyaccmagminx=np.min(LA.norm(body,axis=1))
     secondlist.append(tbodyaccmagminx)
     #69
     norm=LA.norm(body,axis=1)
-    tbodyaccmagiqr=stats.iqr(norm,interpolation="midpoint")*10
+    tbodyaccmagiqr=stats.iqr(norm,interpolation="midpoint")
     secondlist.append(tbodyaccmagiqr)
     #70
-    tgravityaccmagmean=np.mean(LA.norm(gravity,axis=1))*10
+    tgravityaccmagmean=np.mean(LA.norm(gravity,axis=1))
     secondlist.append(tgravityaccmagmean)
     #71
-    tgravityaccmagstd=np.std(LA.norm(gravity,axis=1))*10
+    tgravityaccmagstd=np.std(LA.norm(gravity,axis=1))
     secondlist.append(tgravityaccmagstd)
     #72
     norm=LA.norm(gravity,axis=1)
-    tgravityaccmagmad=np.mean(np.absolute(norm-np.mean(norm)))*10
+    tgravityaccmagmad=np.mean(np.absolute(norm-np.mean(norm)))
     secondlist.append(tgravityaccmagmad)
     # print(tgravityaccmagmad)
     #73
-    tgravityaccmagmaxx=np.max(LA.norm(gravity,axis=1))*10
+    tgravityaccmagmaxx=np.max(LA.norm(gravity,axis=1))
     secondlist.append(tgravityaccmagmaxx)
     #74
-    tgravityaccmagminx=np.min(LA.norm(gravity,axis=1))*10
+    tgravityaccmagminx=np.min(LA.norm(gravity,axis=1))
     secondlist.append(tgravityaccmagminx)
     #75
     norm=LA.norm(gravity,axis=1)
