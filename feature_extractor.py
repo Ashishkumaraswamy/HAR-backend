@@ -51,7 +51,7 @@ def main(t_accelerometer):
     # body=t_accelerometer
     # gravity=gaccelerometer
     body,gravity=bodyandgravity(t_accelerometer,t_accelerometer.shape[0],t_accelerometer.shape[1])
-    body=body*10
+    # body=body*10
     firstlist=[]
     secondlist=[]
     #1
