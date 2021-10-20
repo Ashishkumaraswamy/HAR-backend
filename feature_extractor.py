@@ -17,8 +17,8 @@ def bodyandgravity(t_acceleromter,shape1,shape2):
     # print(shape1," ",shape2)
     for i in range(0,shape1):
         gx=0.9*gx+0.1*t_acceleromter[i][0]
-        gy=0.9*gx+0.1*t_acceleromter[i][1]
-        gz=0.9*gx+0.1*t_acceleromter[i][2]
+        gy=0.9*gy+0.1*t_acceleromter[i][1]
+        gz=0.9*gz+0.1*t_acceleromter[i][2]
         body[i][0]=t_acceleromter[i][0]-gx
         body[i][1]=t_acceleromter[i][1]-gy
         body[i][2]=t_acceleromter[i][2]-gy
