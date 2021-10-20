@@ -25,7 +25,7 @@ def get_data_from_app():
     data= fe.extract_features(np.array(input_json['gyroscope']),np.array(input_json['accelerometer']))
     f_2 = data
     #loaded_model = pickle.load(open('knnpickle_file', 'rb'))
-    loaded_model = pickle.load(open('lrmodel(3).pkl', 'rb'))
+    loaded_model = pickle.load(open('lrmodel (5).pkl', 'rb'))
     outputlabel=['LAYING','SITTING','STANDING','WALKING','WALKING_DOWNSTAIRS','WALKING_UPSTAIRS']
     gxmean,gymean,gzmean=gyroscope_mean(np.array(input_json['gyroscope']))
     data = np.array(data)
