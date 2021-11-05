@@ -3,9 +3,12 @@ import pandas as pd
 from scipy import stats
 from numpy import linalg as LA
 from scipy.signal import butter, lfilter, freqz
+from werkzeug.wrappers import request
 np.seterr(divide='ignore', invalid='ignore')
 # gyscope_val = np.random.uniform(-1,1,384)
 # gyscope_val = gyscope_val.reshape(128,3)
+
+
 
 
 def bodyandgravity(t_acceleromter,shape1,shape2):
@@ -344,34 +347,59 @@ def concat(data):
     #Square root of sum of squares of accelerometer, linear acceleration and gyroscope data
     data["MA"] = np.sqrt(np.square(data['Ax']) + np.square(data['Ay']) + np.square(data['Az']))
     data["ML"] = np.sqrt(np.square(data['Lx']) + np.square(data['Ly']) + np.square(data['Lz']))
-    data["MG"] = np.sqrt(np.square(data['Gx']) + np.square(data['Gy']) + np.square(left_pocket['Gz']))
+    data["MG"] = np.sqrt(np.square(data['Gx']) + np.square(data['Gy']) + np.square(data['Gz']))
    
     return data
 
 def generate_sequence(x,n_time_steps, step):
     
     segments = []
-    for i in range(0, len(x) - n_time_steps, step):
-        ax = x['Ax'].values[i: i + n_time_steps]
-        ay = x['Ay'].values[i: i + n_time_steps]
-        az = x['Az'].values[i: i + n_time_steps]
+    i = 0
+    ax = x['Ax'].values[i: i + n_time_steps]
+    ay = x['Ay'].values[i: i + n_time_steps]
+    az = x['Az'].values[i: i + n_time_steps]
 
-        lx = x['Lx'].values[i: i + n_time_steps]
-        ly = x['Ly'].values[i: i + n_time_steps]
-        lz = x['Lz'].values[i: i + n_time_steps]
-        
-        gx = x['Gx'].values[i: i + n_time_steps]
-        gy = x['Gy'].values[i: i + n_time_steps]
-        gz = x['Gz'].values[i: i + n_time_steps]
+    lx = x['Lx'].values[i: i + n_time_steps]
+    ly = x['Ly'].values[i: i + n_time_steps]
+    lz = x['Lz'].values[i: i + n_time_steps]
+    
+    gx = x['Gx'].values[i: i + n_time_steps]
+    gy = x['Gy'].values[i: i + n_time_steps]
+    gz = x['Gz'].values[i: i + n_time_steps]
 
-        MA = x['MA'].values[i: i + n_time_steps]
-        ML = x['ML'].values[i: i + n_time_steps]
-        MG = x['MG'].values[i: i + n_time_steps]
-       
-        segments.append([ax, ay, az, lx, ly, lz, gx, gy, gz, MA, ML, MG])
-        
+    MA = x['MA'].values[i: i + n_time_steps]
+    ML = x['ML'].values[i: i + n_time_steps]
+    MG = x['MG'].values[i: i + n_time_steps]
+    
+    segments.append([ax, ay, az, lx, ly, lz, gx, gy, gz, MA, ML, MG])
+    
     return segments
 
-def reshape_segments(x, y, n_time_steps, n_features):
+def reshape_segments(x, n_time_steps, n_features):
     x_reshaped = np.asarray(x, dtype= np.float32).reshape(-1, n_time_steps, n_features)
     return x_reshaped
+
+# from tensorflow import keras
+
+# N_TIME_STEPS = 100 #sliding window length
+# STEP = 50 #Sliding window step size
+# N_FEATURES = 12 
+# gyroscope=np.array(request['gyroscope'])
+# accelerometer=np.array(request['accelerometer'])
+# accelerometer_gravity=np.array(request['accelerometer_gravity'])
+# gyroscope.reshape(100,3)
+# accelerometer.reshape(100,3)
+# accelerometer_gravity.reshape(100,3)
+# body=np.subtract(accelerometer,accelerometer_gravity)
+# li=[accelerometer_gravity,body,gyroscope]
+# temp = np.hstack((accelerometer_gravity,body,gyroscope))
+# df = pd.DataFrame(temp ,columns=['Ax','Ay','Az','Lx','Ly','Lz','Gx','Gy','Gz'] )
+# data = df
+# test_X=concat(data)
+
+# test_X=generate_sequence(test_X,N_TIME_STEPS, STEP)
+# X_test=reshape_segments(test_X,N_TIME_STEPS, N_FEATURES)
+# model=keras.models.load_model('keras_model.h5')
+# pred=model.predict(X_test)
+# result = output_list[np.argmax(pred)]
+# print(result)
