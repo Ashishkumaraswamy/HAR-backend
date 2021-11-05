@@ -1,10 +1,5 @@
 import numpy as np
 import pandas as pd
-from scipy import stats
-from numpy import linalg as LA
-from scipy.signal import butter, lfilter, freqz
-from werkzeug.wrappers import request
-np.seterr(divide='ignore', invalid='ignore')
 # gyscope_val = np.random.uniform(-1,1,384)
 # gyscope_val = gyscope_val.reshape(128,3)
 
