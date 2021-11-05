@@ -24,7 +24,6 @@ def get_data_from_app():
     gyroscope=input_json['gyroscope']
     accelerometer=input_json['accelerometer']
     accelerometer_gravity=input_json['accelerometer_gravity']
-    return jsonify(output="dictToReturn")
     gyroscope=np.array(gyroscope)
     accelerometer=np.array(accelerometer)
     accelerometer_gravity=np.array(accelerometer_gravity)
