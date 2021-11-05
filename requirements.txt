@@ -3,3 +3,5 @@ numpy
 flask
 gunicorn
 tensorflow-cpu==2.5.0
+scipy
+sklearn
