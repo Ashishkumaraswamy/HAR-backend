@@ -47,7 +47,7 @@ def get_data_from_app():
     # # dictToReturn = {'data' : f_2 ,'output': pred,'shape':shape,'gxmean':gxmean,'gymean':gymean,'gzmean':gzmean}
     dictToReturn = {'output': pred}
 
-    return jsonify(dictToReturn)
+    return jsonify(output=dictToReturn)
     #return jsonify(gyroscope=gyroscope,accelerometer=accelerometer)
 
 if __name__=="__main__":
