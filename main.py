@@ -26,7 +26,7 @@ def get_data_from_app():
     gyroscope=request.json['gyroscope']
     accelerometer=request.json['accelerometer']
     accelerometer_gravity=request.json['accelerometer_gravity']
-    body=accelerometer-accelerometer_gravity
+    body=np.subtract(np.array(accelerometer),np.array(accelerometer_gravity))
     li=[gravity,body,gyroscope]
     data=pd.DataFrame(data=li, columns=['Ax','Ay','Az','Lx','Ly','Lz','Gx','Gy','Gz'])
     test_X=fe.concat(data)
