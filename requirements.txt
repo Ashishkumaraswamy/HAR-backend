@@ -1,8 +1,5 @@
 pandas
 numpy
-sklearn
 flask
-matplotlib
 gunicorn
-seaborn
-tensorflow
+tensorflow-cpu==2.5.0
