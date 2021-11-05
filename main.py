@@ -42,7 +42,7 @@ def get_data_from_app():
     pred= model.predict(X_test)
     result = output_list[np.argmax(pred)]
     dictToReturn = {'output': result}
-    return jsonify(output=dictToReturn)
+    return jsonify(dictToReturn)
 
 # @app.route('/send',methods=['POST'])
 # def get_data_from_app():
