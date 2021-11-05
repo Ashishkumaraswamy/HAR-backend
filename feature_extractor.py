@@ -336,3 +336,42 @@ def extract_features(gyroscope,accelerometer):
 # data = np.array(data)
 # pred = outputlabel[int(loaded_model.predict(data.reshape(1,9)))]
 # print(pred)
+
+def concat(data):
+    
+    # Select left pocket data
+    
+    #Square root of sum of squares of accelerometer, linear acceleration and gyroscope data
+    data["MA"] = np.sqrt(np.square(data['Ax']) + np.square(data['Ay']) + np.square(data['Az']))
+    data["ML"] = np.sqrt(np.square(data['Lx']) + np.square(data['Ly']) + np.square(data['Lz']))
+    data["MG"] = np.sqrt(np.square(data['Gx']) + np.square(data['Gy']) + np.square(left_pocket['Gz']))
+   
+    return data
+
+def generate_sequence(x,n_time_steps, step):
+    
+    segments = []
+    for i in range(0, len(x) - n_time_steps, step):
+        ax = x['Ax'].values[i: i + n_time_steps]
+        ay = x['Ay'].values[i: i + n_time_steps]
+        az = x['Az'].values[i: i + n_time_steps]
+
+        lx = x['Lx'].values[i: i + n_time_steps]
+        ly = x['Ly'].values[i: i + n_time_steps]
+        lz = x['Lz'].values[i: i + n_time_steps]
+        
+        gx = x['Gx'].values[i: i + n_time_steps]
+        gy = x['Gy'].values[i: i + n_time_steps]
+        gz = x['Gz'].values[i: i + n_time_steps]
+
+        MA = x['MA'].values[i: i + n_time_steps]
+        ML = x['ML'].values[i: i + n_time_steps]
+        MG = x['MG'].values[i: i + n_time_steps]
+       
+        segments.append([ax, ay, az, lx, ly, lz, gx, gy, gz, MA, ML, MG])
+        
+    return segments
+
+def reshape_segments(x, y, n_time_steps, n_features):
+    x_reshaped = np.asarray(x, dtype= np.float32).reshape(-1, n_time_steps, n_features)
+    return x_reshaped
