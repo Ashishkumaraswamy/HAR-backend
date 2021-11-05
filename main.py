@@ -4,6 +4,12 @@ import feature_extractor as fe
 import numpy as np
 from tensorflow import keras
 import pandas as pd
+from logging import FileHandler, WARNING
+
+file_handler=FileHandler('errorlog.txt')
+file_handler.setlevel(WARNING)
+
+app.logger.addhandler(file_handler)
 
 
 app=Flask(__name__)
