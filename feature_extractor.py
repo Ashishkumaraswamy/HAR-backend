@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 from numpy import linalg as LA
+np.seterr(divide='ignore', invalid='ignore')
 
 def bodyandgravity(t_acceleromter,shape1,shape2):
     gx=0 
