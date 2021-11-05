@@ -58,9 +58,9 @@ def get_data_from_app():
     accelerometer_gravity.reshape(100,3)
     body = np.subtract(accelerometer,accelerometer_gravity)
     scaler=StandardScaler()
-    scaler.fit_transform(accelerometer_gravity)
-    scaler.fit_transform(body)
-    scaler.fit_transform(gyroscope)
+    accelerometer_gravity=scaler.fit_transform(accelerometer_gravity)
+    body=scaler.fit_transform(body)
+    gyroscope=scaler.fit_transform(gyroscope)
     shape = list(np.array(input_json['gyroscope']).shape)
     data= fe.extract_features(gyroscope,body,accelerometer_gravity)
     f_2 = data
