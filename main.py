@@ -15,7 +15,8 @@ def home():
 
 @app.route('/send',methods=['POST'])
 def get_data_from_app():
-    output_list = ['Biking','Downstairs','joging','siting','standing','upstairs','walking']
+    
+    output_list = ['Biking' ,' Downstairs', 'Jogging', 'Sitting', 'Standing', 'Upstairs', 'Walking']
    
     N_TIME_STEPS = 100 #sliding window length
     STEP = 50 #Sliding window step size
