@@ -68,7 +68,8 @@ def get_data_from_app():
     loaded_model = pickle.load(open('rdclfmodel.pkl', 'rb'))
     outputlabel=['LAYING','SITTING','STANDING','WALKING','WALKING_DOWNSTAIRS','WALKING_UPSTAIRS']
     data = np.array(data)
-    pred = outputlabel[int(loaded_model.predict(data.reshape(1,81)))]
+    # pred = outputlabel[int(loaded_model.predict(data.reshape(1,81)))]
+    pred=loaded_model.predict(data.reshape(1,81))
     dictToReturn = {'data' : f_2 ,'output': pred,'shape':shape}
     return jsonify(dictToReturn)
 
