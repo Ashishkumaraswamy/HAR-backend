@@ -4,7 +4,7 @@ import feature_extractor as fe
 import numpy as np
 from tensorflow import keras
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 
 app=Flask(__name__)
 
@@ -57,7 +57,7 @@ def get_data_from_app():
     accelerometer.reshape(100,3)
     accelerometer_gravity.reshape(100,3)
     body = np.subtract(accelerometer,accelerometer_gravity)
-    scaler=StandardScaler()
+    scaler=MinMaxScaler(feature_range=(-1,1))
     accelerometer_gravity=scaler.fit_transform(accelerometer_gravity)
     body=scaler.fit_transform(body)
     gyroscope=scaler.fit_transform(gyroscope)
