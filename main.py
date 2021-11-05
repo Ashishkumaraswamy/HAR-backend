@@ -53,9 +53,9 @@ def get_data_from_app():
     gyroscope=np.array(gyroscope)
     accelerometer=np.array(accelerometer)
     accelerometer_gravity=np.array(accelerometer_gravity)
-    gyroscope.reshape(100,3)
-    accelerometer.reshape(100,3)
-    accelerometer_gravity.reshape(100,3)
+    gyroscope.reshape(128,3)
+    accelerometer.reshape(128,3)
+    accelerometer_gravity.reshape(128,3)
     body = np.subtract(accelerometer,accelerometer_gravity)
     scaler=MinMaxScaler(feature_range=(-1,1))
     accelerometer_gravity=scaler.fit_transform(accelerometer_gravity)
@@ -65,7 +65,7 @@ def get_data_from_app():
     data= fe.extract_features(gyroscope,body,accelerometer_gravity)
     f_2 = data
     #loaded_model = pickle.load(open('knnpickle_file', 'rb'))
-    loaded_model = pickle.load(open('lrmodel(2).pkl', 'rb'))
+    loaded_model = pickle.load(open('rdclfmodel.pkl', 'rb'))
     outputlabel=['LAYING','SITTING','STANDING','WALKING','WALKING_DOWNSTAIRS','WALKING_UPSTAIRS']
     data = np.array(data)
     pred = outputlabel[int(loaded_model.predict(data.reshape(1,81)))]
