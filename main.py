@@ -4,6 +4,12 @@ import feature_extractor as fe
 import numpy as np
 from tensorflow import keras
 import pandas as pd
+from logging import FileHandler, WARNING
+
+file_handler=FileHandler('errorlog.txt')
+file_handler.setlevel(WARNING)
+
+app.logger.addhandler(file_handler)
 
 
 app=Flask(__name__)
@@ -32,7 +38,6 @@ def get_data_from_app():
     accelerometer.reshape(100,3)
     accelerometer_gravity.reshape(100,3)
     body=np.subtract(accelerometer,accelerometer_gravity)
-    li=[accelerometer_gravity,body,gyroscope]
     temp = np.hstack((accelerometer_gravity,body,gyroscope))
     df = pd.DataFrame(temp ,columns=['Ax','Ay','Az','Lx','Ly','Lz','Gx','Gy','Gz'] )
     data = df
