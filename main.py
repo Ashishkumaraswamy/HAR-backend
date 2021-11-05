@@ -27,19 +27,18 @@ def get_data_from_app():
     STEP = 50 #Sliding window step size
     N_FEATURES = 12 
     input_json = request.get_json(force=True)
-    gyroscope=request.json['gyroscope']
-    accelerometer=request.json['accelerometer']
-    accelerometer_gravity=request.json['accelerometer_gravity']
-
+    gyroscope=input_json['gyroscope']
+    accelerometer=input_json['accelerometer']
+    accelerometer_gravity=input_json['accelerometer_gravity']
     gyroscope=np.array(gyroscope)
     accelerometer=np.array(accelerometer)
     accelerometer_gravity=np.array(accelerometer_gravity)
     gyroscope.reshape(100,3)
     accelerometer.reshape(100,3)
     accelerometer_gravity.reshape(100,3)
-    body=np.subtract(accelerometer,accelerometer_gravity)
+    body = np.subtract(accelerometer,accelerometer_gravity)
     temp = np.hstack((accelerometer_gravity,body,gyroscope))
-    df = pd.DataFrame(temp ,columns=['Ax','Ay','Az','Lx','Ly','Lz','Gx','Gy','Gz'] )
+    df = pd.DataFrame(temp ,columns=['Ax','Ay','Az','Lx','Ly','Lz','Gx','Gy','Gz'])
     data = df
     test_X=fe.concat(data)
 
