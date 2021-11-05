@@ -24,7 +24,7 @@ def get_data_from_app():
     N_FEATURES = 12 
     input_json = request.get_json(force=True) 
     gyroscope=request.json['gyroscope']
-    acceleromter=request.json['accelerometer']
+    accelerometer=request.json['accelerometer']
     accelerometer_gravity=request.json['accelerometer_gravity']
     body=accelerometer-accelerometer_gravity
     li=[gravity,body,gyroscope]
