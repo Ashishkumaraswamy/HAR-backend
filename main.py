@@ -39,7 +39,7 @@ def send_prob_to_app():
     X_test=fe.reshape_segments(test_X,N_TIME_STEPS, N_FEATURES)
     model= keras.models.load_model('keras_model.h5')
     pred= model.predict(X_test)
-    pred=pred.tolist()
+    pred=pred[0].tolist()
     for i in range(0,len(pred)):
         pred[i]=round(pred[i],3)
     dictToReturn = {'output': pred}
