@@ -40,7 +40,7 @@ def send_prob_to_app():
     model= keras.models.load_model('keras_model.h5')
     pred= model.predict(X_test)
     pred=pred.tolist()
-    for i in range len(pred):
+    for i in range(0,len(pred)):
         pred[i]=round(pred[i],3)
     dictToReturn = {'output': pred}
     return jsonify(dictToReturn)
