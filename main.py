@@ -13,6 +13,35 @@ def home():
     return '<html><body>hello world</body></html>'
 
 
+@app.route('/sendprob',methods=['POST'])
+def send_prob_to_app():
+    output_list = ['Biking' ,' Downstairs', 'Jogging', 'Sitting', 'Standing', 'Upstairs', 'Walking']
+   
+    N_TIME_STEPS = 100 #sliding window length
+    STEP = 50 #Sliding window step size
+    N_FEATURES = 12 
+    input_json = request.get_json(force=True)
+    gyroscope=input_json['gyroscope']
+    accelerometer=input_json['accelerometer']
+    accelerometer_gravity=input_json['accelerometer_gravity']
+    gyroscope=np.array(gyroscope)
+    accelerometer=np.array(accelerometer)
+    accelerometer_gravity=np.array(accelerometer_gravity)
+    gyroscope.reshape(100,3)
+    accelerometer.reshape(100,3)
+    accelerometer_gravity.reshape(100,3)
+    body = np.subtract(accelerometer,accelerometer_gravity)
+    temp = np.hstack((accelerometer_gravity,body,gyroscope))
+    df = pd.DataFrame(temp ,columns=['Ax','Ay','Az','Lx','Ly','Lz','Gx','Gy','Gz'])
+    data = df
+    test_X=fe.concat(data)
+    test_X=fe.generate_sequence(test_X,N_TIME_STEPS, STEP)
+    X_test=fe.reshape_segments(test_X,N_TIME_STEPS, N_FEATURES)
+    model= keras.models.load_model('keras_model.h5')
+    pred= model.predict(X_test)
+    dictToReturn = {'output': list(pred)}
+    return jsonify(dictToReturn)
+
 @app.route('/send',methods=['POST'])
 def get_data_from_app():
     
