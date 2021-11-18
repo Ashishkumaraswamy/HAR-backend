@@ -48,7 +48,7 @@ def send_prob_to_app():
 @app.route('/send',methods=['POST'])
 def get_data_from_app():
     
-    output_list = ['Biking' ,'Standing', 'Jogging', 'Walking', '', 'Standing', 'Downstairs']
+    output_list = ['Biking' ,'Walking', 'Jogging', 'Sitting', 'Upstairs', 'Walking', 'Standing']
    
     N_TIME_STEPS = 100 #sliding window length
     STEP = 50 #Sliding window step size
