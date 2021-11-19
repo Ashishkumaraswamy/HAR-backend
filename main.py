@@ -8,6 +8,12 @@ from sklearn.preprocessing import MinMaxScaler
 
 app=Flask(__name__)
 
+def predict_label(pred,output):
+    if pred[4]>=0.1:
+        return "Standing"
+    else:
+        return output_list[np.argmax(pred)]
+
 @app.route('/',methods=['GET'])
 def home():
     return '<html><body>hello world</body></html>'
@@ -67,12 +73,11 @@ def get_data_from_app():
     df = pd.DataFrame(temp ,columns=['Ax','Ay','Az','Lx','Ly','Lz','Gx','Gy','Gz'])
     data = df
     test_X=fe.concat(data)
-
     test_X=fe.generate_sequence(test_X,N_TIME_STEPS, STEP)
     X_test=fe.reshape_segments(test_X,N_TIME_STEPS, N_FEATURES)
     model= keras.models.load_model('keras_model.h5')
     pred= model.predict(X_test)
-    result = output_list[np.argmax(pred)]
+    result = predict_label(pred,output_list)
     dictToReturn = {'output': result}
     return jsonify(dictToReturn)
 
