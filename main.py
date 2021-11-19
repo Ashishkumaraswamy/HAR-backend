@@ -9,6 +9,7 @@ from sklearn.preprocessing import MinMaxScaler
 app=Flask(__name__)
 
 def predict_label(pred,output):
+    pred=pred[0].tolist()
     if pred[4]>=0.1:
         return "Standing"
     else:
