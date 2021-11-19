@@ -12,7 +12,7 @@ def predict_label(pred,output):
     if pred[4]>=0.1:
         return "Standing"
     else:
-        return output_list[np.argmax(pred)]
+        return output[np.argmax(pred)]
 
 @app.route('/',methods=['GET'])
 def home():
