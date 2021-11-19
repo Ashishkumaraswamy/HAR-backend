@@ -13,7 +13,7 @@ def predict_label(pred,output):
     if pred[4]>=0.1:
         return "Standing"
     elif np.argmax(pred)==1 or np.argmax(pred)==5:
-        if pred[6]==0:
+        if round(pred[6],3)==0:
             return output[np.argmax(pred)]
         else:
             return "Walking"
