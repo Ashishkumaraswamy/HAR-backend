@@ -15,5 +15,6 @@ The possible output class label from the model is ['Biking' ,'Downstairs', 'Jogg
 
 ---
 
+API link - [API page](http://human-activity-recognitionml.herokuapp.com/)
 
 ![website](https://user-images.githubusercontent.com/62739618/143004772-5c7ed034-2335-44ba-aff3-6aa598242539.png)
