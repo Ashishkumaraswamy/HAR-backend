@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify,request,render_template
 import pickle
 import feature_extractor as fe
 import numpy as np
@@ -22,7 +22,8 @@ def predict_label(pred,output):
 
 @app.route('/',methods=['GET'])
 def home():
-    return '<html><body>hello world</body></html>'
+    return render_template('home.html')
+    return '<html><body ><div style="background-image: url("https://www.photobox.co.uk/my/photo/full?photo_id=504267306523")"></body></html>'
 
 
 @app.route('/sendprob',methods=['POST'])
