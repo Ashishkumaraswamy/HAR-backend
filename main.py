@@ -23,7 +23,7 @@ def predict_label(pred,output):
 @app.route('/',methods=['GET'])
 def home():
     return render_template('home.html')
-    return '<html><body ><div style="background-image: url("https://www.photobox.co.uk/my/photo/full?photo_id=504267306523")"></body></html>'
+    #return '<html><body ><img src="/static/website.jpg" style="object-fit: contain;"></body></html>'
 
 
 @app.route('/sendprob',methods=['POST'])
